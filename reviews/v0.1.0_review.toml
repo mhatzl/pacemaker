@@ -1,0 +1,36 @@
+name = "Review for pacemaker version 0.1.0"
+date = "2024-07-03 17:20"
+reviewer = "Manuel Hatzl"
+comment = "Review of requirements requiring manual verification for pacemaker version 0.1.0"
+
+[[requirements]]
+id = "lead"
+comment = "All required leads are supported"
+
+[[requirements]]
+id = "store.manufacturer"
+comment = "Manufacturer data stored in executable."
+
+[[requirements]]
+id = "store.implant_date"
+comment = "Implant date stored in executable."
+
+[[requirements]]
+id = "store.lead"
+comment = "Pacing lead data stored in executable."
+
+[[requirements]]
+id = "param.lrl"
+comment = "Default set to 60ppm."
+
+[[requirements]]
+id = "param.pulse_amplitude"
+comment = "Default set to 3.5V."
+
+[[requirements]]
+id = "param.pulse_width"
+comment = "Default set to 0.4ms."
+
+[[requirements]]
+id = "param.vrp"
+comment = "Default set to 320ms."

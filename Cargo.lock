@@ -191,9 +191,9 @@ dependencies = [
 
 [[package]]
 name = "mantra-rust-macros"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f90a30cb0ec3d44e201bc1623013770305db61e9ad1b4f11f443be756234e785"
+checksum = "93f402399ee44e26905f35c2d1af1e542f7e1c9ed480718ed7897fd9705a14c4"
 dependencies = [
  "defmt",
  "mantra-rust-procm",
@@ -256,6 +256,7 @@ dependencies = [
  "cortex-m",
  "cortex-m-rt",
  "cortex-m-semihosting",
+ "critical-section",
  "defmt",
  "defmt-rtt",
  "defmt-test",
@@ -521,9 +522,9 @@ dependencies = [
 
 [[package]]
 name = "xmc4-hal"
-version = "0.1.1"
+version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f48bbb907ce1162c265994e46a79142d4690d5a273c6cf710f6e5e3b011be864"
+checksum = "ed8565844ba435bad8d84204e8a3716a3f916cdfa275cefff970ffb7bf11dc64"
 dependencies = [
  "cast",
  "cortex-m",
@@ -536,9 +537,9 @@ dependencies = [
 
 [[package]]
 name = "xmc4700"
-version = "0.8.3"
+version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f57b7b82533ce39aedde11080b906834bbc5e6389819986ca44065815eb0d202"
+checksum = "6224fc87942b4860c70c64c175cc22caa810e563d11744eb57ca99b6e1d2fdb2"
 dependencies = [
  "cortex-m",
  "cortex-m-rt",

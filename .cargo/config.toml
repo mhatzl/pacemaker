@@ -1,5 +1,6 @@
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
-runner = "embedded-runner run"
+#runner = "embedded-runner run"
+runner = "C:/Users/ManuelHatzl/Seafile/02_OwnProjects/mantra/embedded-runner/target/debug/embedded-runner.exe run"
 
 rustflags = [
   "-C", "link-arg=-Tlink.x",
@@ -12,6 +13,5 @@ rustflags = [
 [build]
 target = "thumbv7em-none-eabihf" # Cortex-M4F and Cortex-M7F (with FPU)
 
-[alias]
-rb = "run --bin"
-rrb = "run --release --bin"
+[env]
+DEFMT_LOG="info"

@@ -1,0 +1,12 @@
+[requirements.from-wiki]
+root = "doc/requirements.md"
+link = "https://github.com/mhatzl/pacemaker/blob/main/doc/requirements.md"
+
+[traces.from-source]
+root = ""
+
+[coverage]
+data = ["coverage.json"]
+
+[reviews]
+files = ["reviews/v0.1.0_review.toml"]

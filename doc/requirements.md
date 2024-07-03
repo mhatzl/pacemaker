@@ -36,7 +36,21 @@ paces shall be delivered to the atrial chamber without regard to senses.
 
 During triggered pacing, a sense in the ventricular chamber shall trigger an immediate pace in the ventricular chamber.
 
-# `store`: Implant Data
+### `mode.vvt.test.sensed_beat_outside_vrp`: Ensure supporting pulse on sensed beat outside VRP interval
+
+Ensure the pacemaker pulses the ventricular chamber if
+
+- pulse is sensed in the ventricular chamber
+- last pulse outside VRP interval
+
+### `mode.vvt.test.sensed_beat_inside_vrp`: Ensure no pulse on sensed beat inside VRP interval
+
+Ensure the pacemaker does not pulse the ventricular chamber if
+
+- pulse is sensed in the ventricular chamber
+- last pulse inside VRP interval
+
+# `store`(manual): Implant Data
 
 The device shall be capable of storing the information listed in the subsections in device memory.
 
@@ -50,9 +64,9 @@ The device shall be capable of storing the lead implant date.
 
 ## `store.lead`: Pacing Lead Data
 
-The device shall be capable of storing the pacing lead impedance and polarity information.
+The device shall be capable of storing the pacing lead impedance.
 
-# `param`: Parameters
+# `param`(manual): Parameters
 
 Programmable parameters are provided for controlling the delivery of
 patient-tailored, bradycardia therapy. These parameters are described in the
@@ -66,7 +80,6 @@ are listed in the following table.
 | Ventricular Amplitude   |  X  |     |
 | Atrial Pulse Width      |     |  X  |
 | Ventricular Pulse Width |  X  |     |
-| Ventricular Sensitivity |  X  |     |
 | VRP                     |  X  |     |
 
 ## `param.lrl`: Lower Rate Limit (LRL)
@@ -106,14 +119,6 @@ The atrial and ventricular pacing pulse width shall be independently programmabl
 **Unit:** Milliseconds (ms)\
 **Range:** 0.1-1.9ms\
 **Default:** 0.4ms
-
-## `param.pulse_sense`: Pulse Sensitivity
-
-The sensitivity to detect pulses.
-
-**Unit:** Millivolt (mV)\
-**Range:** 1.0-10mV\
-**Default:** 2.5mV
 
 ## `param.vrp`: Ventricular Refractory Period (VRP)
 
