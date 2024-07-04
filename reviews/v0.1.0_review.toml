@@ -8,6 +8,10 @@ id = "lead"
 comment = "All required leads are supported"
 
 [[requirements]]
+id = "store"
+comment = "No confidential information stored in executable."
+
+[[requirements]]
 id = "store.manufacturer"
 comment = "Manufacturer data stored in executable."
 
@@ -18,6 +22,10 @@ comment = "Implant date stored in executable."
 [[requirements]]
 id = "store.lead"
 comment = "Pacing lead data stored in executable."
+
+[[requirements]]
+id = "param"
+comment = "Parameters only used in their assigned mode."
 
 [[requirements]]
 id = "param.lrl"

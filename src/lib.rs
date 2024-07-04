@@ -162,7 +162,7 @@ mod test {
     use defmt::assert;
     use mantra_rust_macros::req;
 
-    use crate::{pulse_aoo, pulse_vvt, DEFAULT_PARAM, LRL_IN_MS};
+    use crate::{pulse_aoo, pulse_vvt, simulate_heart, DEFAULT_PARAM, LRL_IN_MS};
 
     #[test]
     fn aoo_noheartbeat_pacemakerpulse() {
@@ -201,6 +201,22 @@ mod test {
         assert!(
             !pulsed,
             "Ventricular pulse, even though the sensed pulse was inside VRP interval"
+        );
+    }
+
+    #[req(mode.off)]
+    #[test]
+    fn mode_off_simulated_heart_pulses_by_itself() {
+        let (atrial_pulsed, ventricular_pulsed) =
+            simulate_heart(&super::Mode::Off, LRL_IN_MS - 1, LRL_IN_MS - 1, 0);
+
+        assert!(
+            atrial_pulsed,
+            "Simulated heart did not pulse atrial chamber by itself in mode 'off'."
+        );
+        assert!(
+            ventricular_pulsed,
+            "Simulated heart did not pulse ventricular chamber by itself in mode 'off'."
         );
     }
 }
