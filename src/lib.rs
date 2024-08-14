@@ -49,7 +49,7 @@ pub const STORE: Store = Store {
 };
 
 #[req(mode.aoo)]
-fn pulse_aoo(ms_since_last_atrial_pulse: usize, time: usize) -> bool {
+pub fn pulse_aoo(ms_since_last_atrial_pulse: usize, time: usize) -> bool {
     if ms_since_last_atrial_pulse >= LRL_IN_MS {
         println!("@{}ms Pacemaker pulse in atrial chamber.", time * 10);
         pulse_chamber(DEFAULT_PARAM.atrial);
@@ -60,7 +60,7 @@ fn pulse_aoo(ms_since_last_atrial_pulse: usize, time: usize) -> bool {
 }
 
 #[req(mode.vvt)]
-fn pulse_vvt(
+pub fn pulse_vvt(
     ventricular_sensed: bool,
     ms_since_last_ventricular_pulse: usize,
     time: usize,
@@ -82,7 +82,7 @@ fn pulse_vvt(
 }
 
 #[req(pulse)]
-fn pulse_chamber(pulse_param: PulseParam) {
+pub fn pulse_chamber(pulse_param: PulseParam) {
     defmt::debug!(
         " => Pulse: amplitude='{}', width='{}'.",
         pulse_param.amplitude,
