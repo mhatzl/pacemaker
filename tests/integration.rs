@@ -3,10 +3,13 @@
 
 #[defmt_test::tests]
 mod test {
-    use defmt::assert;
+    use defmt::{assert, assert_eq};
     use mantra_rust_macros::req;
 
-    use pacemaker::{param::DEFAULT_PARAM, pulse_aoo, pulse_vvt, simulate_heart, LRL_IN_MS};
+    use pacemaker::{
+        param::{self, DEFAULT_PARAM},
+        pulse_aoo, pulse_vvt, simulate_heart, LRL_IN_MS,
+    };
 
     #[test]
     fn aoo_noheartbeat_pacemakerpulse() {
@@ -62,5 +65,13 @@ mod test {
             ventricular_pulsed,
             "Simulated heart did not pulse ventricular chamber by itself in mode 'off'."
         );
+    }
+
+    #[req(param.lrl)]
+    #[test]
+    fn c_wrapper() {
+        let lrl_ms = unsafe { param::lrl_in_ms(param::DEFAULT_PARAM.lrl) };
+
+        assert_eq!(LRL_IN_MS, lrl_ms, "Wrong unit conversion in C function.");
     }
 }

@@ -21,3 +21,5 @@ typedef struct Param {
     /// [req(param.vrp)]
     unsigned int vrp
 } Param;
+
+unsigned int lrl_in_ms(unsigned int lrl);
