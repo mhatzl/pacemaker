@@ -45,7 +45,7 @@ The following tools and hardware is needed for this demo:
   cargo test --test integration
   ```
 
-  This will run the unit tests in `lib.rs`.
+  This will run the integration tests in `tests/integration.rs`.
   Because the `defmt` feature of `mantra-rust-macros` is enabled for this demo,
   requirement coverage information is automatically gathered during test execution.
 
