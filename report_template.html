@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .c_true {
+        color: green;
+    }
+
+    .c_false {
+        color: red;
+    }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Traced</th>
+            <th>Covered</th>
+            <th>Passed</th>
+        </tr>
+        {% for req in requirements %}
+        <tr>
+            <td class="req">{{ req.id }}</td>
+            <td class="c_{{ req.trace_info.traced }}">{{ req.trace_info.traced }}</td>
+            <td class="c_{{ req.test_coverage_info.covered }}">{{ req.test_coverage_info.covered }}</td>
+            <td class="c_{{ req.test_coverage_info.passed }}">{{ req.test_coverage_info.passed }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>

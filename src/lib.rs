@@ -115,7 +115,7 @@ impl defmt::Format for Mode {
     }
 }
 
-const DEFAULT_PARAM: Param = Param {
+pub const DEFAULT_PARAM: Param = Param {
     lrl: 60,
     atrial: PulseParam {
         amplitude: 3.5,
@@ -127,98 +127,30 @@ const DEFAULT_PARAM: Param = Param {
     },
     vrp: 32,
 };
-const LRL_IN_MS: usize = (DEFAULT_PARAM.lrl * 100) / 60;
+pub const LRL_IN_MS: usize = (DEFAULT_PARAM.lrl * 100) / 60;
 
 /// Pacemaker parameter.
 #[req(param)]
 pub struct Param {
     /// Lower rate limit [ppm]
     /// [req(param.lrl)]
-    lrl: usize,
+    pub lrl: usize,
     /// Atrial pulse parameters.
-    atrial: PulseParam,
+    pub atrial: PulseParam,
     /// Ventricular pulse parameters.
-    ventricular: PulseParam,
+    pub ventricular: PulseParam,
     /// Ventricular Refractory Period [ms].
     /// [req(param.vrp)]
-    vrp: usize,
+    pub vrp: usize,
 }
 
 /// Pulse parameter for both atrial and ventricular chambers.
 #[req(param.pulse_amplitude, param.pulse_width)]
 pub struct PulseParam {
     /// Pulse amplitude [V].
-    amplitude: f32,
+    pub amplitude: f32,
     /// Pulse width [ms].
-    width: f32,
-}
-
-/// --------------------------------------------------------------
-///                         TESTS
-/// --------------------------------------------------------------
-#[cfg(test)]
-#[defmt_test::tests]
-mod test {
-    use defmt::assert;
-    use mantra_rust_macros::req;
-
-    use crate::{pulse_aoo, pulse_vvt, simulate_heart, DEFAULT_PARAM, LRL_IN_MS};
-
-    #[test]
-    fn aoo_noheartbeat_pacemakerpulse() {
-        let ms_since_last_pulse = LRL_IN_MS;
-
-        let pulsed = pulse_aoo(ms_since_last_pulse, 0);
-
-        assert!(
-            pulsed,
-            "Atrial pulse not set, but last pulse was too long ago."
-        );
-    }
-
-    #[req(mode.vvt.test.sensed_beat_outside_vrp)]
-    #[test]
-    fn vvt_pulsesensed_pacemakerpulse() {
-        let ventricular_sensed = true;
-        let last_pulse = DEFAULT_PARAM.vrp + 1;
-
-        let pulsed = pulse_vvt(ventricular_sensed, last_pulse, 0);
-
-        assert!(
-            pulsed,
-            "No supporting ventricular pulse, even though a pulse was sensed outside VRP interval"
-        );
-    }
-
-    #[req(mode.vvt.test.sensed_beat_inside_vrp)]
-    #[test]
-    fn vvt_pulsesensed_nopacemakerpulse() {
-        let ventricular_sensed = true;
-        let last_pulse = DEFAULT_PARAM.vrp;
-
-        let pulsed = pulse_vvt(ventricular_sensed, last_pulse, 0);
-
-        assert!(
-            !pulsed,
-            "Ventricular pulse, even though the sensed pulse was inside VRP interval"
-        );
-    }
-
-    #[req(mode.off)]
-    #[test]
-    fn mode_off_simulated_heart_pulses_by_itself() {
-        let (atrial_pulsed, ventricular_pulsed) =
-            simulate_heart(&super::Mode::Off, LRL_IN_MS - 1, LRL_IN_MS - 1, 0);
-
-        assert!(
-            atrial_pulsed,
-            "Simulated heart did not pulse atrial chamber by itself in mode 'off'."
-        );
-        assert!(
-            ventricular_pulsed,
-            "Simulated heart did not pulse ventricular chamber by itself in mode 'off'."
-        );
-    }
+    pub width: f32,
 }
 
 // ---------------------------- SIMULATION SPECIFIC CODE --------------
@@ -262,7 +194,7 @@ pub fn demo_loop(mode: &Mode) {
     }
 }
 
-fn simulate_heart(
+pub fn simulate_heart(
     mode: &Mode,
     ms_since_last_atrial_pulse: usize,
     ms_since_last_ventricular_pulse: usize,

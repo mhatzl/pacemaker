@@ -1,0 +1,2 @@
+# To use external GDB server
+# gdb-connection = ":3333"

@@ -4,7 +4,8 @@ version = "0.1.0"
 edition = "2021"
 build = "build.rs"
 
-[lib]
+[[test]]
+name = "integration"
 harness = false
 
 [dependencies]
@@ -20,7 +21,7 @@ xmc4-hal = { version = "0.5.5", features = ["xmc4700"]}
 critical-section = "1.1.2"
 
 [dev-dependencies]
-defmt-test = "0.3"
+defmt-test = "0.3.2"
 
 [build-dependencies]
 bindgen = "0.70.1"
