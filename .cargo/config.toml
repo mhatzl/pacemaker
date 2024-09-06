@@ -1,5 +1,5 @@
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
-runner = "C:\\Users\\ManuelHatzl\\Seafile\\02_OwnProjects\\mantra\\embedded-runner\\target\\debug\\embedded-runner.exe run"
+runner = "embedded-runner run"
 
 rustflags = [
   "-C", "link-arg=-Tlink.x",

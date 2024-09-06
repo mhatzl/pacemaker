@@ -9,6 +9,8 @@ use mantra_rust_macros::req;
 use panic_probe as _;
 use xmc4_hal as _;
 
+pub mod param;
+
 #[cfg(target_os = "none")]
 #[defmt::panic_handler]
 fn panic() -> ! {
@@ -36,7 +38,7 @@ pub struct Store {
     pub lead_implant_date: u64,
     /// Lead impedance in Ohm.
     /// [req(store.lead)]
-    pub lead_impedance: usize,
+    pub lead_impedance: u32,
 }
 
 /// Stored device and implant date information.
@@ -49,10 +51,10 @@ pub const STORE: Store = Store {
 };
 
 #[req(mode.aoo)]
-pub fn pulse_aoo(ms_since_last_atrial_pulse: usize, time: usize) -> bool {
+pub fn pulse_aoo(ms_since_last_atrial_pulse: u32, time: u32) -> bool {
     if ms_since_last_atrial_pulse >= LRL_IN_MS {
         println!("@{}ms Pacemaker pulse in atrial chamber.", time * 10);
-        pulse_chamber(DEFAULT_PARAM.atrial);
+        pulse_chamber(param::DEFAULT_PARAM.atrial);
         true
     } else {
         false
@@ -62,19 +64,19 @@ pub fn pulse_aoo(ms_since_last_atrial_pulse: usize, time: usize) -> bool {
 #[req(mode.vvt)]
 pub fn pulse_vvt(
     ventricular_sensed: bool,
-    ms_since_last_ventricular_pulse: usize,
-    time: usize,
+    ms_since_last_ventricular_pulse: u32,
+    time: u32,
 ) -> bool {
     if ms_since_last_ventricular_pulse >= LRL_IN_MS {
         println!("@{}ms Pacemaker pulse in ventricular chamber.", time * 10);
-        pulse_chamber(DEFAULT_PARAM.ventricular);
+        pulse_chamber(param::DEFAULT_PARAM.ventricular);
         true
-    } else if ventricular_sensed && ms_since_last_ventricular_pulse > DEFAULT_PARAM.vrp {
+    } else if ventricular_sensed && ms_since_last_ventricular_pulse > param::DEFAULT_PARAM.vrp {
         println!(
             "@{}ms Supporting pacemaker pulse in ventricular chamber.",
             time * 10
         );
-        pulse_chamber(DEFAULT_PARAM.ventricular);
+        pulse_chamber(param::DEFAULT_PARAM.ventricular);
         true
     } else {
         false
@@ -82,7 +84,7 @@ pub fn pulse_vvt(
 }
 
 #[req(pulse)]
-pub fn pulse_chamber(pulse_param: PulseParam) {
+pub fn pulse_chamber(pulse_param: param::PulseParam) {
     defmt::debug!(
         " => Pulse: amplitude='{}', width='{}'.",
         pulse_param.amplitude,
@@ -115,43 +117,7 @@ impl defmt::Format for Mode {
     }
 }
 
-pub const DEFAULT_PARAM: Param = Param {
-    lrl: 60,
-    atrial: PulseParam {
-        amplitude: 3.5,
-        width: 0.4,
-    },
-    ventricular: PulseParam {
-        amplitude: 3.5,
-        width: 0.4,
-    },
-    vrp: 32,
-};
-pub const LRL_IN_MS: usize = (DEFAULT_PARAM.lrl * 100) / 60;
-
-/// Pacemaker parameter.
-#[req(param)]
-pub struct Param {
-    /// Lower rate limit [ppm]
-    /// [req(param.lrl)]
-    pub lrl: usize,
-    /// Atrial pulse parameters.
-    pub atrial: PulseParam,
-    /// Ventricular pulse parameters.
-    pub ventricular: PulseParam,
-    /// Ventricular Refractory Period [ms].
-    /// [req(param.vrp)]
-    pub vrp: usize,
-}
-
-/// Pulse parameter for both atrial and ventricular chambers.
-#[req(param.pulse_amplitude, param.pulse_width)]
-pub struct PulseParam {
-    /// Pulse amplitude [V].
-    pub amplitude: f32,
-    /// Pulse width [ms].
-    pub width: f32,
-}
+pub const LRL_IN_MS: u32 = (param::DEFAULT_PARAM.lrl * 100) / 60;
 
 // ---------------------------- SIMULATION SPECIFIC CODE --------------
 
@@ -196,9 +162,9 @@ pub fn demo_loop(mode: &Mode) {
 
 pub fn simulate_heart(
     mode: &Mode,
-    ms_since_last_atrial_pulse: usize,
-    ms_since_last_ventricular_pulse: usize,
-    time: usize,
+    ms_since_last_atrial_pulse: u32,
+    ms_since_last_ventricular_pulse: u32,
+    time: u32,
 ) -> (bool, bool) {
     let mut atrial_pulsed = false;
     let mut ventricular_pulsed = false;
@@ -237,7 +203,7 @@ pub fn simulate_heart(
                 }
             }
         }
-    } else if mode == &Mode::Vvt && ms_since_last_ventricular_pulse > DEFAULT_PARAM.vrp {
+    } else if mode == &Mode::Vvt && ms_since_last_ventricular_pulse > param::DEFAULT_PARAM.vrp {
         // randomly pulse before to trigger sensed ventricular pulse
         let rand_nr = next_rand_nr();
 

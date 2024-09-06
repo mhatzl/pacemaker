@@ -2,11 +2,15 @@
 
 Implementation of a basic pacemaker to showcase requirements tracing using [mantra](https://github.com/mhatzl/mantra).
 
+The demo contains `no_std` Rust code and a C header file
+to demonstrate requirements traceability over different programming languages.
+
 ## Prerequisite
 
 The following tools and hardware is needed for this demo: 
 
 - Install the [Rust toolchain](https://www.rust-lang.org/tools/install)
+- Install [Clang for bindgen](https://rust-lang.github.io/rust-bindgen/requirements.html) to demonstrate C interop
 - Install the [embedded-runner](https://github.com/mhatzl/embedded-runner) via `cargo install embedded-runner`
 - Install [mantra](https://github.com/mhatzl/mantra) via `cargo install mantra`
 - Install the [ARM GNU toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
@@ -38,7 +42,7 @@ The following tools and hardware is needed for this demo:
   Tests may be run via
 
   ```
-  cargo test --lib
+  cargo test --test integration
   ```
 
   This will run the unit tests in `lib.rs`.

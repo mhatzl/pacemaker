@@ -6,7 +6,7 @@ mod test {
     use defmt::assert;
     use mantra_rust_macros::req;
 
-    use pacemaker::{pulse_aoo, pulse_vvt, simulate_heart, DEFAULT_PARAM, LRL_IN_MS};
+    use pacemaker::{param::DEFAULT_PARAM, pulse_aoo, pulse_vvt, simulate_heart, LRL_IN_MS};
 
     #[test]
     fn aoo_noheartbeat_pacemakerpulse() {
