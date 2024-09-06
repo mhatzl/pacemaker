@@ -5,7 +5,7 @@ typedef struct PulseParam {
     float amplitude;
     /// Pulse width [ms].
     float width;
-};
+} PulseParam;
 
 /// Pacemaker parameter.
 /// [req(param)]
@@ -20,4 +20,4 @@ typedef struct Param {
     /// Ventricular Refractory Period [ms].
     /// [req(param.vrp)]
     unsigned int vrp
-};
+} Param;
