@@ -93,7 +93,6 @@ pub fn pulse_chamber(pulse_param: param::PulseParam) {
 }
 
 /// Available operating modes for the pacemaker
-#[req(mode)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Mode {
     /// No operation.
