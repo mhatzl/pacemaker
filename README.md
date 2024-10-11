@@ -11,6 +11,7 @@ The following tools and hardware is needed for this demo:
 
 - Install the [Rust toolchain](https://www.rust-lang.org/tools/install)
 - Install [Clang for bindgen](https://rust-lang.github.io/rust-bindgen/requirements.html) to demonstrate C interop
+- Ensure a [native C Compiler](https://docs.rs/cc/latest/cc/#compile-time-requirements) is available (needed to install *mantra*)
 - Install the [embedded-runner](https://github.com/mhatzl/embedded-runner) via `cargo install embedded-runner`
 - Install [mantra](https://github.com/mhatzl/mantra) via `cargo install mantra`
 - Install the [ARM GNU toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
