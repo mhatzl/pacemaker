@@ -42,7 +42,7 @@ pub struct Store {
 }
 
 /// Stored device and implant date information.
-#[req(store)]
+#[mantra_rust_macros::req(store)]
 pub const STORE: Store = Store {
     device_model: "mantra-pacemaker",
     serial_number: "123456",

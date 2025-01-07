@@ -287,9 +287,9 @@ dependencies = [
 
 [[package]]
 name = "mantra-rust-macros"
-version = "0.6.1"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e4370687e1b009107b5c19c0c1136a4d4742898ec1c3f5d086396f0ad02ff4a"
+checksum = "2cfceff27353a5c773321ad79773898899a54e3a55b6cf82f8dc595f4d28c1e1"
 dependencies = [
  "defmt",
  "mantra-rust-procm",

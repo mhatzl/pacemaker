@@ -58,6 +58,19 @@ The following tools and hardware is needed for this demo:
 
   **Note:** You may skip this step, because coverage of a previous test run already exists in the repository.
 
+- Collect language server information
+
+  To correctly resolve the fully qualified name of a language element, *mantra* uses information stored
+  in the [Language Server Index Format](https://microsoft.github.io/language-server-protocol/specifications/lsif/0.6.0/specification/).
+
+  For Rust projects, this information can be generated via `rust-analyzer` by executing the following command:
+
+  ```
+  rust-analyzer lsif . > lsif.json
+  ```
+
+  This overwrites the existing `lsif.json` file that already contains the information for the unmodified pacemaker project.
+
 - Setting up mantra
 
   To collect available requirements, traces, coverage, and reviews, run

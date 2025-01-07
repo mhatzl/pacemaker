@@ -1,12 +1,18 @@
-[requirements.from-wiki]
-root = "doc/requirements.md"
-link = "https://github.com/mhatzl/pacemaker/blob/main/doc/requirements.md"
+[project]
+name = "pacemaker"
+version = "0.1.0"
+repository = "https://github.com/mhatzl/pacemaker"
 
-[traces.from-source]
+[[requirements]]
+root = "doc/requirements.md"
+origin = "https://github.com/mhatzl/pacemaker/blob/main/doc/requirements.md"
+
+[[traces]]
 root = ""
+lsif_data = ["lsif.json"]
 
 [coverage]
-data = ["coverage.json"]
+files = ["coverage.json"]
 
-[reviews]
+[review]
 files = ["reviews/v0.1.0_review.toml"]
